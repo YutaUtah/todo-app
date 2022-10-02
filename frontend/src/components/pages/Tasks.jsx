@@ -68,9 +68,10 @@ export const Tasks = () => {
         </Heading>
       )}
       <HorizontalToDoBox
-        displayedEvents={displayedEvents}
-        setDisplayedEvents={setDisplayedEvents}
-        setAllEvents={setAllEvents}
+        // displayedEvents={displayedEvents}
+        // setDisplayedEvents={setDisplayedEvents}
+        // setAllEvents={setAllEvents}
+        allEvents={allEvents}
       />
       <Flex justify="center">
         <GoBackHomeButton />
