@@ -18,14 +18,14 @@ export const ToDoCard = (props) => {
     details,
     status,
     storyPoints,
-    // deleteToDoCard,
-    // changeStatus,
+    deleteToDoCard,
+    changeStatus,
   } = props;
 
   const getTagColor = (status) => {
     return {
       open: "gray",
-      "in progress": "blue",
+      inprogress: "blue",
       done: "yellow",
     }[status];
   };
@@ -37,29 +37,31 @@ export const ToDoCard = (props) => {
       bg={boxBg}
       h="345px"
       w={{ base: "300px", md: "300px" }}
+      m={2}
       direction="column"
     >
       <Box p="20px">
-        {/* <DropdownButton
-        //   changeStatus={changeStatus}
+        <DropdownButton
+          changeStatus={changeStatus}
           IoEllipsisHorizontalSharp={IoEllipsisHorizontalSharp}
           title={title}
-        /> */}
+        />
         <Box>
           <Text
             fontWeight="600"
             color={mainText}
             w="100%"
-            fontSize="3xl"
+            fontSize="2xl"
             mb={1}
           >
             {title}
           </Text>
-          {/* <PrimaryTag color={getTagColor(status)} status={status} /> */}
+          <PrimaryTag color={getTagColor(status)} status={status} />
         </Box>
         <Box>
           <Text fontWeight="200" color={mainText}>
-            {start} - {end}
+            {/* {start} - {end} */}
+            2022-2-2 - 2022-2-2
           </Text>
           <Text fontWeight="200" color={mainText}>
             Estimated: {storyPoints} Hours
@@ -78,7 +80,7 @@ export const ToDoCard = (props) => {
         </Text>
         <Flex gap="5">
           <CheckIcon />
-          {/* <DeleteIcon onClick={deleteToDoCard} /> */}
+          <DeleteIcon onClick={deleteToDoCard} />
         </Flex>
       </Flex>
     </Flex>
