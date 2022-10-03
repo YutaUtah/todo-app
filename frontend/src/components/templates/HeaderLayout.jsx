@@ -37,15 +37,15 @@ export const HeaderLayout = () => {
           </Heading>
         </Link>
         <Flex>
-          {/* <Box mx={2}>
+          <Box mx={2}>
             <Link to="/board">Board</Link>
-          </Box> */}
+          </Box>
           <Box mx={2}>
             <Link to="/tasks">Tasks</Link>
           </Box>
-          {/* <Box mx={2}>
+          <Box mx={2}>
             <Link to="/stats">Stats</Link>
-          </Box> */}
+          </Box>
           {/* <Box mx={2}>
             {user?.displayName ? (
               <Link onClick={handleSignOut}>Log out</Link>
