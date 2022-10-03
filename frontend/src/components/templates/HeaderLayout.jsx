@@ -3,24 +3,24 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { Box, Flex, Heading } from "@chakra-ui/react";
 
-// import { UserAuth } from "../../providers/Auth";
+import { UserAuth } from "../../providers/Auth";
 
 export const HeaderLayout = () => {
-//   const { user, logOut } = UserAuth();
+  const { user, logOut } = UserAuth();
   const navigate = useNavigate();
 
-//   const handleSignOut = async () => {
-//     try {
-//       await logOut();
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-//   useEffect(() => {
-//     if (user === null) {
-//       navigate("/signin");
-//     }
-//   }, [user, navigate]);
+  const handleSignOut = async () => {
+    try {
+      await logOut();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    if (user === null) {
+      navigate("/signin");
+    }
+  }, [user, navigate]);
 
   return (
     <>
@@ -46,13 +46,13 @@ export const HeaderLayout = () => {
           <Box mx={2}>
             <Link to="/stats">Stats</Link>
           </Box>
-          {/* <Box mx={2}>
+          <Box mx={2}>
             {user?.displayName ? (
               <Link onClick={handleSignOut}>Log out</Link>
             ) : (
               <Link to="/signin">Sign in</Link>
             )}
-          </Box> */}
+          </Box>
         </Flex>
       </Flex>
     </>
