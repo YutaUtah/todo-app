@@ -10,7 +10,7 @@ import { validateNewEvent } from "../../utils/validator/errorValidator";
 import { submitFromEvent } from "../../services/todos.service";
 
 export const Home = () => {
-//   const { user } = UserAuth();
+    const { user } = UserAuth();
 
   const {
     localizer,
@@ -27,7 +27,7 @@ export const Home = () => {
     if (result === "succeeded") {
       setNewEvent({ ...newEvent, status: "open" });
       setAllEvents([...allEvents, newEvent]);
-      submitFromEvent(newEvent)
+      submitFromEvent(newEvent);
     }
   };
 
