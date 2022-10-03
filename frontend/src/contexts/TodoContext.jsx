@@ -38,7 +38,20 @@ export const TodoContextProvider = ({ children }) => {
       (eachEvent) => eachEvent.status === status
     );
     setDisplayedEvents(filteredEvents);
+    // setAllEvents(filteredEvents);
     setFilterState(status);
+  };
+
+  const getTagColor = (status) => {
+    return {
+      open: "gray",
+      "in progress": "blue",
+      done: "yellow",
+    }[status];
+  };
+
+  const formatDate = (date) => {
+    return date.split("T")[0];
   };
 
   const resetCards = () => {
@@ -73,6 +86,8 @@ export const TodoContextProvider = ({ children }) => {
     filterState,
     groupByStatusDashBoard,
     sumUpStoryPoints,
+    getTagColor,
+    formatDate,
   };
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 };
