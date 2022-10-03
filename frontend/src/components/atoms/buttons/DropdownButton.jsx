@@ -40,7 +40,7 @@ export const DropdownButton = (props) => {
           </MenuItem>
           <MenuItem
             onClick={() =>
-              changeStatusById(allEvents, setAllEvents, "inprogress", title)
+              changeStatusById(allEvents, setAllEvents, "in progress", title)
             }
           >
             Move to In Progress
