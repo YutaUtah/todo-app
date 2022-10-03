@@ -1,13 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { Container, Flex, Heading } from "@chakra-ui/react";
 
 import { TodoContext } from "../../contexts/TodoContext";
 import { VerticalToDoBox } from "../organisms/todoBox/VerticalToDoBox";
 import { GoBackHomeButton } from "../atoms/buttons/GoBackHomeButton";
+import { getAllAndSetState } from "../../services/todos.service";
 
 export const Board = () => {
-  const { groupByStatusDashBoard } = useContext(TodoContext);
+  const { groupByStatusDashBoard, setAllEvents } = useContext(TodoContext);
+
+  useEffect(() => {
+    getAllAndSetState(setAllEvents);
+  }, []);
 
   return (
     <Container maxW="container.xl" pt={10}>
@@ -28,7 +33,7 @@ export const Board = () => {
             status="open"
           />
           <VerticalToDoBox
-            cards={groupByStatusDashBoard("inprogress")}
+            cards={groupByStatusDashBoard("in progress")}
             status="inprogress"
           />
           <VerticalToDoBox
