@@ -7,10 +7,12 @@ import { EventBox } from "../organisms/EventBox";
 import { UserAuth } from "../../providers/Auth";
 import { TodoContext } from "../../contexts/TodoContext";
 import { validateNewEvent } from "../../utils/validator/errorValidator";
-import { submitFromEvent } from "../../services/todos.service";
+import { getAllAndSetState, submitFromEvent } from "../../services/todos.service";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
     const { user } = UserAuth();
+    const navigate = useNavigate();
 
   const {
     localizer,
@@ -26,8 +28,9 @@ export const Home = () => {
     const result = validateNewEvent(newEvent, allEvents);
     if (result === "succeeded") {
       setNewEvent({ ...newEvent, status: "open" });
-      setAllEvents([...allEvents, newEvent]);
       submitFromEvent(newEvent);
+      getAllAndSetState(setAllEvents);
+      navigate("/tasks")
     }
   };
 
@@ -43,18 +46,17 @@ export const Home = () => {
   return (
     <Container maxW="container.xl" pt={10}>
       <Heading mx={4} my={6}>
-        Welcome,
-        {/* {user?.displayName}! */}
+        Welcome, {user?.displayName}!
       </Heading>
       <Flex align="center">
         <VStack bg="white" borderRadius="20px" shadow="md" m={2}>
-          <Calendar
+          {/* <Calendar
             localizer={localizer}
             events={allEvents}
             startAccessor="start"
             endAccessor="end"
             style={{ height: 500, margin: "50px" }}
-          />
+          /> */}
         </VStack>
         <VStack m={2}>
           <EventBox
