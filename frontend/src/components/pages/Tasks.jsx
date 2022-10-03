@@ -14,17 +14,14 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { TodoContext } from "../../contexts/TodoContext";
 import { HorizontalToDoBox } from "../organisms/todoBox/HorinzontalToDoBox";
 import { GoBackHomeButton } from "../atoms/buttons/GoBackHomeButton";
-import { getAll } from "../../services/todos.service";
-import axios from "axios";
+import { getAllAndSetState } from "../../services/todos.service";
 
 export const Tasks = () => {
   const { allEvents, setAllEvents, filterByStatus, resetCards, filterState } =
     useContext(TodoContext);
 
   useEffect(() => {
-    axios.get("/api/todos/").then((res) => {
-      setAllEvents(res.data);
-    });
+    getAllAndSetState(setAllEvents);
   }, []);
 
   return (
@@ -47,7 +44,7 @@ export const Tasks = () => {
           </MenuButton>
           <MenuList>
             <MenuItem onClick={() => filterByStatus("open")}>Open</MenuItem>
-            <MenuItem onClick={() => filterByStatus("inprogress")}>
+            <MenuItem onClick={() => filterByStatus("in progress")}>
               In Progress
             </MenuItem>
             <MenuItem onClick={() => filterByStatus("done")}>Done</MenuItem>
