@@ -1,16 +1,14 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Home } from "../components/pages/Home";
-import { HeaderLayout } from "../components/templates/HeaderLayout";
 
 // import { Protected } from "../components/molecules/Protected";
 // import { Account } from "../components/pages/Account";
-// import { Board } from "../components/pages/Board";
-// import { Home } from "../components/pages/Home";
+import { Board } from "../components/pages/Board";
+import { Home } from "../components/pages/Home";
 // import { SignIn } from "../components/pages/SignIn";
 import { Tasks } from "../components/pages/Tasks";
-// import { Stats } from "../components/pages/Stats";
-// import { HeaderLayout } from "../components/templates/HeaderLayout";
+import { Stats } from "../components/pages/Stats";
+import { HeaderLayout } from "../components/templates/HeaderLayout";
 
 export const BaseRoute = () => {
   return (
@@ -27,9 +25,9 @@ export const BaseRoute = () => {
             </Protected>
           }
         /> */}
-        {/* <Route path="/board" element={<Board />} /> */}
+        <Route path="/board" element={<Board />} />
         <Route path="/tasks" element={<Tasks />} />
-        {/* <Route path="/stats" element={<Stats />} /> */}
+        <Route path="/stats" element={<Stats />} />
       </Routes>
     </BrowserRouter>
   );
