@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import {
   Flex,
@@ -9,8 +9,12 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 
+import { TodoContext } from "../../../contexts/TodoContext";
+
 export const DropdownButton = (props) => {
-  const { IoEllipsisHorizontalSharp, changeStatus, title } = props;
+  const { IoEllipsisHorizontalSharp, changeStatusById, title } = props;
+  const { allEvents, setAllEvents } = useContext(TodoContext);
+
   return (
     <Flex w="100%" mb="10px" justifyContent="end">
       <Menu>
@@ -27,13 +31,25 @@ export const DropdownButton = (props) => {
           <Icon w="24px" h="24px" as={IoEllipsisHorizontalSharp} />
         </MenuButton>
         <MenuList>
-          <MenuItem onClick={() => changeStatus("open", title)}>
+          <MenuItem
+            onClick={() =>
+              changeStatusById(allEvents, setAllEvents, "open", title)
+            }
+          >
             Move to Open
           </MenuItem>
-          <MenuItem onClick={() => changeStatus("inprogress", title)}>
+          <MenuItem
+            onClick={() =>
+              changeStatusById(allEvents, setAllEvents, "inprogress", title)
+            }
+          >
             Move to In Progress
           </MenuItem>
-          <MenuItem onClick={() => changeStatus("done", title)}>
+          <MenuItem
+            onClick={() =>
+              changeStatusById(allEvents, setAllEvents, "done", title)
+            }
+          >
             Move to Done
           </MenuItem>
         </MenuList>
