@@ -3,33 +3,11 @@ import React, { useContext } from "react";
 import { TodoContext } from "../../../contexts/TodoContext";
 import { ToDoCard } from "../../molecules/ToDoCard";
 
-import axios from "axios";
+import { changeStatusById, deleteById } from "../../../services/todos.service";
 
 export const VerticalToDoBox = (props) => {
   const { cards, status } = props;
-  const { allEvents, setAllEvents, setDisplayedEvents } =
-    useContext(TodoContext);
-
-  const deleteToDoCard = (event) => {
-    const modifiedAfterDeletedEvents = allEvents.filter(
-      (eachEvent) => eachEvent.title !== event.title
-    );
-    setAllEvents(modifiedAfterDeletedEvents);
-    setDisplayedEvents(modifiedAfterDeletedEvents);
-  };
-
-  const changeStatus = (status, title) => {
-    // Deepcopied with the spread syntax
-    const modifiedStatusEvents = [...allEvents];
-    modifiedStatusEvents.map((eachEvent) => {
-      if (eachEvent.title === title) {
-        eachEvent.status = status;
-        axios.put(`/api/todos/${eachEvent.id}/`, eachEvent).then(()=>{
-            setAllEvents(modifiedStatusEvents)
-        })
-      }
-    });
-  };
+  const { allEvents, setAllEvents } = useContext(TodoContext);
 
   return (
     <Flex
@@ -54,8 +32,12 @@ export const VerticalToDoBox = (props) => {
             details={eachEvent.details}
             status={eachEvent.status}
             storyPoints={eachEvent.storyPoints}
-            deleteToDoCard={() => deleteToDoCard(eachEvent)}
-            changeStatus={(status, title) => changeStatus(status, title)}
+            deleteById={() =>
+              deleteById(eachEvent, setAllEvents, allEvents)
+            }
+            changeStatusById={(allEvents, setAllEvents, status, title) =>
+              changeStatusById(allEvents, setAllEvents, status, title)
+            }
           />
         </Box>
       ))}
