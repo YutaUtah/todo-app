@@ -3,29 +3,32 @@ import React, { memo } from "react";
 import { Grid, GridItem } from "@chakra-ui/react";
 
 import { ToDoCard } from "../../molecules/ToDoCard";
+import axios from "axios";
 
 export const HorizontalToDoBox = memo((props) => {
-  const { allEvents, displayedEvents, setDisplayedEvents, setAllEvents } = props;
+  const { allEvents, setAllEvents } = props;
 
-//   const deleteToDoCard = (event) => {
-//     const modifiedAfterDeletedEvents = displayedEvents.filter(
-//       (eachEvent) => eachEvent.title !== event.title
-//     );
-//     setDisplayedEvents(modifiedAfterDeletedEvents);
-//     setAllEvents(modifiedAfterDeletedEvents);
-//   };
+  const deleteToDoCard = (event) => {
+    const modifiedAllEvents = allEvents.filter(
+      (eachEvent) => eachEvent.title !== event.title
+    );
+    axios.delete(`/api/todos/${event.id}`).then(() => {
+        setAllEvents(modifiedAllEvents)
+    })
+  };
 
-//   const changeStatus = (status, title) => {
-//     // Deepcopied with the spread syntax
-//     const modifiedStatusEvents = [...displayedEvents];
-//     modifiedStatusEvents.map((eachEvent) => {
-//       if (eachEvent.title === title) {
-//         eachEvent.status = status;
-//       }
-//     });
-//     setDisplayedEvents(modifiedStatusEvents);
-//   };
-console.log(allEvents)
+  const changeStatus = (status, title) => {
+    // Deepcopied with the spread syntax
+    const modifiedStatusEvents = [...allEvents];
+    modifiedStatusEvents.map((eachEvent) => {
+      if (eachEvent.title === title) {
+        eachEvent.status = status;
+        axios.put(`/api/todos/${eachEvent.id}/`, eachEvent).then(() => {
+            setAllEvents(modifiedStatusEvents)
+        })
+      }
+    });
+  };
 
   return (
     <>
@@ -40,8 +43,8 @@ console.log(allEvents)
               details={event.details}
               status={event.status}
               storyPoints={event.storyPoints}
-            //   deleteToDoCard={() => deleteToDoCard(event)}
-            //   changeStatus={(status, title) => changeStatus(status, title)}
+              deleteToDoCard={() => deleteToDoCard(event)}
+              changeStatus={(status, title) => changeStatus(status, title)}
             />
           </GridItem>
         ))}
