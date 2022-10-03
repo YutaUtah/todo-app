@@ -18,15 +18,8 @@ import { getAll } from "../../services/todos.service";
 import axios from "axios";
 
 export const Tasks = () => {
-  const {
-    displayedEvents,
-    setDisplayedEvents,
-    allEvents,
-    setAllEvents,
-    filterByStatus,
-    resetCards,
-    filterState,
-  } = useContext(TodoContext);
+  const { allEvents, setAllEvents, filterByStatus, resetCards, filterState } =
+    useContext(TodoContext);
 
   useEffect(() => {
     axios.get("/api/todos/").then((res) => {
@@ -54,7 +47,7 @@ export const Tasks = () => {
           </MenuButton>
           <MenuList>
             <MenuItem onClick={() => filterByStatus("open")}>Open</MenuItem>
-            <MenuItem onClick={() => filterByStatus("in progress")}>
+            <MenuItem onClick={() => filterByStatus("inprogress")}>
               In Progress
             </MenuItem>
             <MenuItem onClick={() => filterByStatus("done")}>Done</MenuItem>
@@ -67,12 +60,7 @@ export const Tasks = () => {
           Current Filter: {filterState}
         </Heading>
       )}
-      <HorizontalToDoBox
-        // displayedEvents={displayedEvents}
-        // setDisplayedEvents={setDisplayedEvents}
-        // setAllEvents={setAllEvents}
-        allEvents={allEvents}
-      />
+      <HorizontalToDoBox setAllEvents={setAllEvents} allEvents={allEvents} />
       <Flex justify="center">
         <GoBackHomeButton />
       </Flex>
