@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 
 import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
@@ -6,10 +6,14 @@ import { CheckIcon, DeleteIcon } from "@chakra-ui/icons";
 
 import { PrimaryTag } from "../atoms/tags/PrimaryTag";
 import { DropdownButton } from "../atoms/buttons/DropdownButton";
+import { TodoContext } from "../../contexts/TodoContext";
 
 export const ToDoCard = (props) => {
   let boxBg = useColorModeValue("white !important", "#111c44 !important");
   let mainText = useColorModeValue("gray.800", "white");
+
+  const { getTagColor, formatDate, allEvents, setAllEvents } =
+    useContext(TodoContext);
 
   const {
     title,
@@ -18,17 +22,9 @@ export const ToDoCard = (props) => {
     details,
     status,
     storyPoints,
-    deleteToDoCard,
-    changeStatus,
+    deleteById,
+    changeStatusById,
   } = props;
-
-  const getTagColor = (status) => {
-    return {
-      open: "gray",
-      inprogress: "blue",
-      done: "yellow",
-    }[status];
-  };
 
   return (
     <Flex
@@ -42,7 +38,7 @@ export const ToDoCard = (props) => {
     >
       <Box p="20px">
         <DropdownButton
-          changeStatus={changeStatus}
+          changeStatusById={changeStatusById}
           IoEllipsisHorizontalSharp={IoEllipsisHorizontalSharp}
           title={title}
         />
@@ -60,8 +56,7 @@ export const ToDoCard = (props) => {
         </Box>
         <Box>
           <Text fontWeight="200" color={mainText}>
-            {/* {start} - {end} */}
-            2022-2-2 - 2022-2-2
+            {formatDate(start)} - {formatDate(end)}
           </Text>
           <Text fontWeight="200" color={mainText}>
             Estimated: {storyPoints} Hours
@@ -79,8 +74,12 @@ export const ToDoCard = (props) => {
           {details}
         </Text>
         <Flex gap="5">
-          <CheckIcon />
-          <DeleteIcon onClick={deleteToDoCard} />
+          <CheckIcon
+            onClick={() =>
+              changeStatusById(allEvents, setAllEvents, "done", title)
+            }
+          />
+          <DeleteIcon onClick={deleteById} />
         </Flex>
       </Flex>
     </Flex>
