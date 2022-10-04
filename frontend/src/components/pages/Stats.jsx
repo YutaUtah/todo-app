@@ -32,17 +32,17 @@ export const Stats = () => {
       >
         <Stat>
           <StatLabel>Open Status</StatLabel>
-          <StatNumber>{sumUpStoryPoints("open")}</StatNumber>
+          <StatNumber>{sumUpStoryPoints("in progress")} hours</StatNumber>
           <StatHelpText>Feb 12 - Feb 28</StatHelpText>
         </Stat>
         <Stat>
           <StatLabel>In Progress Status</StatLabel>
-          <StatNumber>{sumUpStoryPoints("in progress")}</StatNumber>
+          <StatNumber>{sumUpStoryPoints("in progress")} hours</StatNumber>
           <StatHelpText>Feb 12 - Feb 28</StatHelpText>
         </Stat>
         <Stat>
           <StatLabel>Done Status</StatLabel>
-          <StatNumber>{sumUpStoryPoints("done")}</StatNumber>
+          <StatNumber>{sumUpStoryPoints("done")} hours</StatNumber>
           <StatHelpText>Feb 12 - Feb 28</StatHelpText>
         </Stat>
       </Flex>

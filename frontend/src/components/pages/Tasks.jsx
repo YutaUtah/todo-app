@@ -14,15 +14,24 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { TodoContext } from "../../contexts/TodoContext";
 import { HorizontalToDoBox } from "../organisms/todoBox/HorinzontalToDoBox";
 import { GoBackHomeButton } from "../atoms/buttons/GoBackHomeButton";
-import { getAllAndSetState } from "../../services/todos.service";
+import { useTodos } from "../../hooks/useTodo";
 
 export const Tasks = () => {
-  const { allEvents, setAllEvents, filterByStatus, resetCards, filterState } =
-    useContext(TodoContext);
+  const {
+    allEvents,
+    setAllEvents,
+    filterByStatus,
+    resetCards,
+    filterState,
+    setFilterState,
+    displayedEvents,
+    setDisplayedEvents,
+  } = useContext(TodoContext);
 
   useEffect(() => {
-    getAllAndSetState(setAllEvents);
-  }, []);
+    setDisplayedEvents(allEvents)
+    setFilterState("")
+  }, [allEvents]);
 
   return (
     <Container maxW="container.xl" pt={10}>
@@ -57,7 +66,12 @@ export const Tasks = () => {
           Current Filter: {filterState}
         </Heading>
       )}
-      <HorizontalToDoBox setAllEvents={setAllEvents} allEvents={allEvents} />
+      <HorizontalToDoBox
+        displayedEvents={displayedEvents}
+        setAllEvents={setAllEvents}
+        allEvents={allEvents}
+        setDisplayedEvents={setDisplayedEvents}
+      />
       <Flex justify="center">
         <GoBackHomeButton />
       </Flex>

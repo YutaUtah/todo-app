@@ -1,14 +1,16 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 import { dateFnsLocalizer } from "react-big-calendar";
 import format from "date-fns/format";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
+import { useTodos } from "../hooks/useTodo";
 
 export const TodoContext = createContext({});
 
 export const TodoContextProvider = ({ children }) => {
+  const todos = useTodos();
   const locales = {
     "en-US": require("date-fns/locale/en-US"),
   };
@@ -19,6 +21,7 @@ export const TodoContextProvider = ({ children }) => {
     getDay,
     locales,
   });
+
   const [newEvent, setNewEvent] = useState({
     title: "",
     start: "",
@@ -33,12 +36,15 @@ export const TodoContextProvider = ({ children }) => {
   const [toDoDetail, setToDoDetail] = useState("");
   const [filterState, setFilterState] = useState("");
 
+  useEffect(() => {
+    setAllEvents(todos)
+  }, [allEvents]);
+
   const filterByStatus = (status) => {
     const filteredEvents = allEvents.filter(
       (eachEvent) => eachEvent.status === status
     );
     setDisplayedEvents(filteredEvents);
-    // setAllEvents(filteredEvents);
     setFilterState(status);
   };
 
@@ -84,6 +90,7 @@ export const TodoContextProvider = ({ children }) => {
     setDisplayedEvents,
     resetCards,
     filterState,
+    setFilterState,
     groupByStatusDashBoard,
     sumUpStoryPoints,
     getTagColor,

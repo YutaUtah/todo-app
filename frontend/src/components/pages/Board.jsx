@@ -5,14 +5,15 @@ import { Container, Flex, Heading } from "@chakra-ui/react";
 import { TodoContext } from "../../contexts/TodoContext";
 import { VerticalToDoBox } from "../organisms/todoBox/VerticalToDoBox";
 import { GoBackHomeButton } from "../atoms/buttons/GoBackHomeButton";
-import { getAllAndSetState } from "../../services/todos.service";
+import { useTodos } from "../../hooks/useTodo";
 
 export const Board = () => {
-  const { groupByStatusDashBoard, setAllEvents } = useContext(TodoContext);
+  const { groupByStatusDashBoard, allEvents, setAllEvents } = useContext(TodoContext);
+  const todos = useTodos();
 
   useEffect(() => {
-    getAllAndSetState(setAllEvents);
-  }, []);
+    setAllEvents(todos)
+  }, [allEvents]);
 
   return (
     <Container maxW="container.xl" pt={10}>

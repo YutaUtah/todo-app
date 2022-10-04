@@ -9,6 +9,7 @@ import { TodoContext } from "../../contexts/TodoContext";
 import { validateNewEvent } from "../../utils/validator/errorValidator";
 import { getAllAndSetState, submitFromEvent } from "../../services/todos.service";
 import { useNavigate } from "react-router-dom";
+import { useTodos } from "../../hooks/useTodo";
 
 export const Home = () => {
     const { user } = UserAuth();
@@ -23,6 +24,7 @@ export const Home = () => {
     toDoDetail,
     setToDoDetail,
   } = useContext(TodoContext);
+  const todos = useTodos();
 
   const handleAddEvent = () => {
     const result = validateNewEvent(newEvent, allEvents);

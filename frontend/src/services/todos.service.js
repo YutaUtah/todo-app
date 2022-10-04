@@ -10,6 +10,7 @@ export const deleteById = (event, setAllEvents, allEvents) => {
   const modifiedAllEvents = allEvents.filter(
     (eachEvent) => eachEvent.title !== event.title
   );
+
   axios.delete(`/api/todos/${event.id}`).then(() => {
     setAllEvents(modifiedAllEvents);
   });

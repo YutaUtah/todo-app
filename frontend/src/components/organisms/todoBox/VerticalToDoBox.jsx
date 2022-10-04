@@ -1,5 +1,5 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { TodoContext } from "../../../contexts/TodoContext";
 import { ToDoCard } from "../../molecules/ToDoCard";
 
@@ -7,7 +7,7 @@ import { changeStatusById, deleteById } from "../../../services/todos.service";
 
 export const VerticalToDoBox = (props) => {
   const { cards, status } = props;
-  const { allEvents, setAllEvents } = useContext(TodoContext);
+  const { allEvents, setAllEvents,setDisplayedEvents } = useContext(TodoContext);
 
   return (
     <Flex
