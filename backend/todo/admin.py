@@ -5,4 +5,4 @@ from .models import Todo
 
 
 class TodoAdmin(admin.ModelAdmin):
-    list_display = ('title', 'details', 'start', 'end', 'story_points', 'status')
+    list_display = ('title', 'details', 'start', 'end', 'storyPoints', 'status')
